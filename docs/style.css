@@ -1,0 +1,226 @@
+/* ==== Base styles ==== */
+
+@font-face {
+    font-family: 'AGENCY FB';
+    src: url('https://s3.amazonaws.com/FontsThatStartWithAgency/AgencyFB-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --white:     #fff;
+    --yellow:    #000;
+    --pink:      #C99C9A;
+    --black:     #000;
+    --dark:      #101010;
+    --link-pink: #C99C9A;   /* classic bootstrap‑style blue */
+    --bg-default: #000; /* black background */
+    --text-default: var(--white); /* Black text */
+    --nav-text: var(--white); /* white for nav links */
+    --footer-bg: var(--dark); /* Dark grey for footer */
+    --footer-text: #fff; /* White for footer text */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Agency FB', monospace;
+    margin: 0;
+    background: var(--bg-default);
+    color: var(--text-default);
+    line-height: 1.6;
+}
+
+/* --- Global link style (everything but the menu) --- */
+a {
+    color: var(--link-pink);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+
+/* ==== Layout ==== */
+
+.container {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.main-content {
+    padding: 2rem 0 3rem;
+}
+
+/* Header */
+.site-header {
+    background: var(--black);
+    color: var(--white);
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--white); /* Subtle separator */
+}
+
+.site-header h1 {
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.04em;
+}
+
+/* Navigation */
+.site-nav {
+    background: #000; /* black background for nav */
+    border-bottom: 1px solid var(--pink);
+}
+
+.nav-inner {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 0.75rem 0;
+}
+
+.site-nav a {
+    font-weight: bold;
+    color: var(--nav-text); /* Black for nav links */
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 0.2rem;
+}
+
+.site-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background: var(--link-pink); /* pink underline on hover */
+    transition: width 0.24s ease-out;
+}
+
+.site-nav a:hover::after {
+    width: 100%;
+}
+
+/* Cards / Sections */
+.card {
+    background: #040001; /* Light grey background for cards */
+    border-radius: 10px; /* Slightly rounded corners */
+    border: 1px solid var(--link-pink); /* Dark grey border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    padding: 1.75rem 1.6rem;
+    margin-top: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.card h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1.45rem;
+    color: var(--white);
+}
+
+.card p {
+    margin: 0.3rem 0;
+    line-height: 1.6;
+    color: var(--white); /* white for card text */
+}
+
+/* Footer */
+.site-footer {
+    background: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 1.2rem 0 1.8rem;
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Contact form */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.contact-form label {
+    font-size: 0.9rem;
+    color: var(--dark); /* Dark grey for labels */
+}
+
+.contact-form input,
+.contact-form textarea {
+    background: #fff; /* White background for inputs */
+    border-radius: 8px; /* Rounded inputs */
+    border: 1px solid var(--white); /* Dark grey border */
+    padding: 0.6rem 0.75rem;
+    color: var(--black); /* Black text */
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: rgba(51, 51, 51, 0.7); /* Dark grey placeholder */
+}
+
+.contact-form button {
+    align-self: flex-start;
+    margin-top: 0.5rem;
+    padding: 0.55rem 1.4rem;
+    border-radius: 20px; /* Pill-shaped button */
+    border: none;
+    background: var(--link-blue); /* Blue button */
+    color: #fff; /* White text on button */
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3); /* Blue shadow */
+}
+
+/* ==== Typing animation styles ==== */
+.type-line {
+    display: inline-block;
+    white-space: pre-wrap;
+    min-height: 1em;
+}
+
+.typing-cursor {
+    display: inline-block;
+    margin-left: 1px;
+    color: var(--link-pink); /* Blue cursor */
+    animation: blink 0.8s steps(1) infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+}
+
+/* Responsive tweaks */
+@media (max-width: 640px) {
+    .site-header h1 {
+        font-size: 1.9rem;
+    }
+
+    .nav-inner {
+        flex-wrap: wrap;
+        row-gap: 0.35rem;
+        justify-content: center; /* Center nav items on small screens */
+    }
+
+    .card {
+        padding: 1.4rem 1.25rem;
+    }
+
+    main {
+        padding: 1.5rem; /* Adjust main padding for smaller screens */
+    }
+}
