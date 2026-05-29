@@ -1,5 +1,6 @@
 # DAATCHI
-Studio [4] Fashion Technology Design
+Website of Studio [4] Fashion Technology Design
+DSDT Studios
 
 ## theme developed by🛋️ONSOFA.ai
 ONSOFA Studio [4] Artificial General Intelligence 
