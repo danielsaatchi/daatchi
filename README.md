@@ -23,7 +23,7 @@ daatchi/docs/
 ├── CODE_OF_CONDUCT.md         # Opensource note
 └── fonts/
 |   └── CascadiaCode-Regular.woff2   # Optional – if not from URL (check .css file)
-|   └── Agency-FB-Regular.woff2   # Optional – if not from URL (check .css file)
+|   └── Agency-FB-Regular.woff2      # Optional – if not from URL (check .css file)
 └── metadata_images/
     └── DAATCHI-favicon.ico         # favicon
 ```
