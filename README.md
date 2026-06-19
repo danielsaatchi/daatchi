@@ -35,8 +35,9 @@ daatchi/docs/
 3. In Settings → Pages → Source, select `main` → `/docs`.
 4. Afterthat, this site will be live at `https://danielsaatchi.github.io/daatchi`.
 
-## Update note (v0.2.1)
-1. Bugs are fixed for v0.1.3
+## Update note (v0.2.2)
+1. Bugs are fixed for v0.2.1
 2. MCP for crypto/shop/AI agents are added
+3. Wallets addresses corrected
 
 Happy hacking! 🚀
