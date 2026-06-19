@@ -1,91 +1,416 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>daatchi >/ technologies</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="metadata_images/DAATCHI_icon.png" type="image/x-icon">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAATCHI — Technologies</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="metadata_images/DAATCHI-favicon.ico" type="image/x-icon">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <h1 class="type-line" data-delay="700">
-        Developing Technologies
-      </h1>
-      <p class="type-line" data-delay="1300">
-        by DAATCHI
-      </p>
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">DAA<span>T</span>CHI</a>
+    <ul class="nav-links">
+      <li><a href="index.html" id="nav-studio">Studio</a></li>
+      <li><a href="projects.html" id="nav-projects">Projects</a></li>
+      <li><a href="technologies.html" id="nav-technologies">Technologies</a></li>
+      <li><a href="designs.html" id="nav-designs">Designs</a></li>
+      <li><a href="contact.html" id="nav-contact">Contact</a></li>
+      <li><a href="shops.html" id="nav-shop">Shop</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="cart-btn" onclick="openCart()">
+        Cart <span class="cart-count" id="cartCount">0</span>
+      </button>
     </div>
-  </header>
-
-  <nav class="site-nav">
-    <div class="container nav-inner">
-      <a class="type-line" data-delay="0" href="index.html">Studio</a>
-      <a class="type-line" data-delay="0" href="projects.html">Projects</a>
-      <a class="type-line" data-delay="0" href="technologies.html">Technologies</a>
-      <a class="type-line" data-delay="0" href="designs.html">Designs</a>
-      <a class="type-line" data-delay="0" href="contact.html">Contact</a>
-      <a class="type-line" data-delay="0" href="shops.html">Shop</a>
+  </div>
+</nav>
+<div class="price-ticker" id="priceTicker">
+  <span style="color:var(--pink);animation:pulse 1.2s ease-in-out infinite">Fetching live prices…</span>
+</div>
+<div class="page-hero">
+  <p class="page-eyebrow type-line" data-delay="200">DAATCHI Studio</p>
+  <h1 class="page-title"><span class="type-line" data-delay="400">Developing</span> <span class="type-line" data-delay="700">Technologies</span></h1>
+  <p class="page-sub type-line" data-delay="1000">Hardware and software systems in active development — from MVP to prototype, across wearables, AI, blockchain, and precision medicine.</p>
+</div>
+<div class="page-content">
+  <div class="content-grid">
+    <div class="content-card">
+      <p class="card-index type-line" data-delay="100">01 · MVP Phase · Hardware + Software</p>
+      <h3 class="card-title type-line" data-delay="200">Fashionable AI Transponder Intel Ring</h3>
+      <p class="card-body type-line" data-delay="350">100 manufactured NEUSARS Intel Rings — a wearable AI transponder in ring form. Developed jointly by XSEALD and DAATCHI Studio.</p>
+      <span class="card-tag">MVP</span>
     </div>
-  </nav>
-
-  <main class="container main-content">
-    <section class="card">
-      <h3 class="type-line" data-delay="1500">
-        >/: Fashionable AI Transponder Intel Ring 
-      </h3>
-      <br><p class="type-line" data-delay="1900">
-        [MVP phase; software/hardware], 100 manufactured NEUSARS Intel Ring, XSEALD and DAATCHI
-      </p>
-    </section>
-
-    <section class="card">
-      <h3 class="type-line" data-delay="2800">
-        >/: Fashionable & Sport Version of Conia Precision Medicine Trauma Apps
-      </h3>
-      <p class="type-line" data-delay="3400">
-        [MVP phase; software], Conia Personalized Trauma Telemedicine iOS/WatchOS App, (Collaboration between XSEALD & DAATCHI)     </p>
-    </section>
-
-    <section class="card">
-      <h3 class="type-line" data-delay="3900">
-        DAATCHI-BATTCOIN Blockchain Platform Integration
-      </h3>
-      <p class="type-line" data-delay="4500">
-        [Prototype phase; software], BATTCOIN Cryptocurrency and Blockchain AI System, (DAATCHI collbaorations with BATTPAY Startup and ONSOFA.ai) 
-      </p>
-    </section>
-
-    <section class="card">
-      <h3 class="type-line" data-delay="5000">
-        Ventures Simulations Technology
-      </h3>
-      <p class="type-line" data-delay="5200">
-        [Prototype phase; software], Agentic Ventures Simulations Technologies (VST), DAATCHI collaborations with ONSOFA.ai      </p>
-    </section>
-
-
-    <section class="card">
-      <h3 class="type-line" data-delay="5300">
-        AI Conceieger System for Fashion, Skincare & Beautyshops
-      </h3>
-      <p class="type-line" data-delay="5500">
-        [Prototype phase; software/Hardware], Multimodal Agentic Skincare Concieger System for Skincare, (DAATCHI Collaboraitons with ONSOFA.ai)    </section>
-    </section>
-
-
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p class="type-line" data-delay="3000">
-         © 2023-present DAATCHI Studio [4] Fashion Technology Designs – All rights reserved. 
-      </p>
+    <div class="content-card">
+      <p class="card-index type-line" data-delay="120">02 · MVP Phase · Software</p>
+      <h3 class="card-title type-line" data-delay="240">Conia Precision Medicine Trauma App</h3>
+      <p class="card-body type-line" data-delay="390">Fashionable and sport version of the Conia Personalised Trauma Telemedicine iOS/WatchOS app. Collaboration between XSEALD and DAATCHI.</p>
+      <span class="card-tag">MVP</span>
     </div>
-  </footer>
+    <div class="content-card">
+      <p class="card-index type-line" data-delay="140">03 · Prototype Phase · Software</p>
+      <h3 class="card-title type-line" data-delay="280">DAATCHI-BATTCOIN Blockchain Platform</h3>
+      <p class="card-body type-line" data-delay="430">BATTCOIN cryptocurrency and blockchain AI system — integrating fashion commerce with decentralised finance. Collaboration with BATTPAY and ONSOFA.ai.</p>
+      <span class="card-tag">Prototype</span>
+    </div>
+    <div class="content-card">
+      <p class="card-index type-line" data-delay="160">04 · Prototype Phase · Software</p>
+      <h3 class="card-title type-line" data-delay="320">Venture Simulations Technology</h3>
+      <p class="card-body type-line" data-delay="470">Agentic Venture Simulations Technology (VST) — AI-driven modelling for startup and investment decisions. DAATCHI collaboration with ONSOFA.ai.</p>
+      <span class="card-tag">Prototype</span>
+    </div>
+    <div class="content-card">
+      <p class="card-index type-line" data-delay="180">05 · Prototype Phase · Hardware + Software</p>
+      <h3 class="card-title type-line" data-delay="360">AI Concierge for Fashion, Skincare &amp; Beauty</h3>
+      <p class="card-body type-line" data-delay="510">Multimodal agentic skincare concierge system — personalised product recommendations, skin analysis, and in-store AI assistance. DAATCHI collaboration with ONSOFA.ai.</p>
+      <span class="card-tag">Prototype</span>
+    </div>
+  </div>
+</div>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">DAA<span>T</span>CHI</div>
+      <p class="footer-desc">Avant-garde fashion technology studio. Luxury designs, AI systems, metamaterial wearables. Pay crypto — no banks required.</p>
+      <div class="footer-crypto-icons">
+        <span class="footer-crypto btc">₿ BTC</span>
+        <span class="footer-crypto usdt">₮ USDT</span>
+        <span class="footer-crypto trx">◈ TRX</span>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Shop</p>
+      <ul class="footer-links">
+        <li><a href="shops.html#shop">New Arrivals</a></li>
+        <li><a href="shops.html#shop">Collections</a></li>
+        <li><a href="shops.html#shop">Outerwear</a></li>
+        <li><a href="shops.html#shop">Accessories</a></li>
+        <li><a href="shops.html#shop">Sale</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Company</p>
+      <ul class="footer-links">
+        <li><a href="index.html">About Studio</a></li>
+        <li><a href="designs.html">Lookbook</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="technologies.html">Technologies</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Help</p>
+      <ul class="footer-links">
+        <li><a href="shops.html">Crypto Payments</a></li>
+        <li><a href="contact.html">Shipping Policy</a></li>
+        <li><a href="contact.html">Returns</a></li>
+        <li><a href="shops.html">Size Guide</a></li>
+        <li><a href="contact.html">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2023-present DAATCHI Studio [4] Fashion Technology Designs. All rights reserved.</p>
+    <div class="footer-policy">
+      <a href="contact.html">Privacy</a>
+      <a href="contact.html">Terms</a>
+      <a href="contact.html">Cookies</a>
+    </div>
+  </div>
+</footer>
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <span class="cart-title">YOUR CART</span>
+    <button class="cart-close" onclick="closeCart()">×</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">
+      <span class="total-label">Total</span>
+      <span class="total-amount" id="cartTotalDisplay">$0</span>
+    </div>
+    <p class="total-crypto" id="cartCryptoTotal"></p>
+    <button class="checkout-btn" onclick="openPaymentModal()">Proceed to Payment</button>
+    <p class="crypto-checkout-note">Pay with <span class="btc-c">Bitcoin</span> · <span class="usdt-c">Tether</span> · <span class="trx-c">Tron</span></p>
+  </div>
+</div>
 
-  <script src="typing.js"></script>
+<!-- PAYMENT MODAL -->
+<div class="modal-overlay" id="paymentModal">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">CRYPTO CHECKOUT</span>
+      <button class="modal-close" onclick="closePaymentModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="price-refresh-row">
+        <span class="price-live-label">Live Rates</span>
+        <span class="price-live-values">
+          <span class="btc-c" id="modalBtcRate">BTC —</span>
+          <span class="trx-c" id="modalTrxRate">TRX —</span>
+        </span>
+        <button class="btn-refresh" id="refreshBtn" onclick="refreshModalPrices()">⟳ Refresh</button>
+      </div>
+      <div class="order-summary">
+        <p class="order-summary-title">Order Summary</p>
+        <ul class="order-items-list" id="modalItemsList"></ul>
+        <div class="order-summary-total-row">
+          <span class="order-summary-total-label">Total</span>
+          <span class="order-summary-total" id="modalTotal">$0.00</span>
+        </div>
+      </div>
+      <p class="payment-label">Step 1 — Choose Payment Currency</p>
+      <div class="payment-options">
+        <button class="payment-option btc" id="optBTC" onclick="selectPayment('btc')">
+          <span class="payment-option-icon">₿</span>
+          <div class="payment-option-name">Bitcoin</div>
+          <div class="payment-option-sub">BTC · On-chain</div>
+        </button>
+        <button class="payment-option usdt" id="optUSDT" onclick="selectPayment('usdt')">
+          <span class="payment-option-icon">₮</span>
+          <div class="payment-option-name">Tether</div>
+          <div class="payment-option-sub">USDT · TRC-20 / ERC-20</div>
+        </button>
+        <button class="payment-option trx" id="optTRX" onclick="selectPayment('trx')">
+          <span class="payment-option-icon">◈</span>
+          <div class="payment-option-name">Tron</div>
+          <div class="payment-option-sub">TRX · TRC-20</div>
+        </button>
+      </div>
+      <div class="payment-details" id="detailsBTC">
+        <div class="payment-amount-box">
+          <div class="amount-card"><p class="amount-label">USD Total</p><p class="amount-value" id="btcUSD">$0.00</p></div>
+          <div class="amount-card"><p class="amount-label">BTC Amount</p><p class="amount-value btc-color" id="btcAmount">0.000000 BTC</p></div>
+        </div>
+        <div class="wallet-box">
+          <p class="wallet-label">Send BTC to this address</p>
+          <p class="wallet-address" id="btcAddress">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</p>
+          <button class="copy-btn" id="copyBTC" onclick="copyAddress('btcAddress','copyBTC')">📋 Copy Address</button>
+        </div>
+        <p class="payment-notice">Send the exact BTC amount. Confirmed after 1 network confirmation (~10 min). Do not send from an exchange.</p>
+      </div>
+      <div class="payment-details" id="detailsUSDT">
+        <div class="payment-amount-box">
+          <div class="amount-card"><p class="amount-label">USD Total</p><p class="amount-value" id="usdtUSD">$0.00</p></div>
+          <div class="amount-card"><p class="amount-label">USDT Amount</p><p class="amount-value usdt-color" id="usdtAmount">0.00 USDT</p></div>
+        </div>
+        <div class="wallet-box">
+          <p class="wallet-label">Send USDT (TRC-20 or ERC-20)</p>
+          <p class="wallet-address" id="usdtAddress">TQn9Y2khEsLJW1ChVWFMSMeRDow5KcbLSE</p>
+          <button class="copy-btn" id="copyUSDT" onclick="copyAddress('usdtAddress','copyUSDT')">📋 Copy Address</button>
+        </div>
+        <p class="payment-notice">TRC-20 confirms in ~1–3 min, ERC-20 in ~15 min. Send the exact amount shown.</p>
+      </div>
+      <div class="payment-details" id="detailsTRX">
+        <div class="payment-amount-box">
+          <div class="amount-card"><p class="amount-label">USD Total</p><p class="amount-value" id="trxUSD">$0.00</p></div>
+          <div class="amount-card"><p class="amount-label">TRX Amount</p><p class="amount-value trx-color" id="trxAmount">0.00 TRX</p></div>
+        </div>
+        <div class="wallet-box">
+          <p class="wallet-label">Send TRX (TRON network only)</p>
+          <p class="wallet-address" id="trxAddress">TQn9Y2khEsLJW1ChVWFMSMeRDow5KcbLSE</p>
+          <button class="copy-btn" id="copyTRX" onclick="copyAddress('trxAddress','copyTRX')">📋 Copy Address</button>
+        </div>
+        <p class="payment-notice">Send TRX on TRON network only. Confirmations ~1–3 minutes. Do not send from an exchange.</p>
+      </div>
+      <p class="form-section-title">Step 2 — Your Details</p>
+      <div class="form-row">
+        <label class="form-label">Full Name <span class="req">*</span></label>
+        <input class="form-input" id="fName" type="text" placeholder="Your full name" />
+      </div>
+      <div class="form-row-2">
+        <div>
+          <label class="form-label">Telegram ID <span class="req">*</span></label>
+          <input class="form-input" id="fTelegram" type="text" placeholder="@username or 123456789" />
+        </div>
+        <div>
+          <label class="form-label">Email or Phone <span class="req">*</span></label>
+          <input class="form-input" id="fContact" type="text" placeholder="email@mail.com or +1234…" />
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Delivery Address <span class="req">*</span></label>
+        <textarea class="form-input form-textarea" id="fAddress" rows="3" placeholder="Street, City, ZIP, Country"></textarea>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Transaction Hash / TX ID <span class="req">*</span></label>
+        <input class="form-input" id="fTxHash" type="text" placeholder="Paste your transaction hash after sending" />
+      </div>
+      <button class="confirm-payment-btn" onclick="confirmPayment()">Generate Receipt &amp; Send to Manager</button>
+    </div>
+  </div>
+</div>
+
+<!-- RECEIPT POPUP -->
+<div class="receipt-overlay" id="receiptOverlay">
+  <div class="receipt-box">
+    <div class="receipt-header">
+      <div class="receipt-check">✅</div>
+      <h2 class="receipt-title">ORDER CONFIRMED</h2>
+      <p class="receipt-sub">Copy the message below and send it to the shop manager on Telegram to complete your order.</p>
+    </div>
+    <div class="receipt-body">
+      <div class="receipt-step"><div class="receipt-step-num">1</div><div class="receipt-step-text"><strong>Copy</strong> the receipt message below.</div></div>
+      <div class="receipt-step"><div class="receipt-step-num">2</div><div class="receipt-step-text">Open Telegram → <span class="tg-handle">@DS461</span> — tap the blue button.</div></div>
+      <div class="receipt-step"><div class="receipt-step-num">3</div><div class="receipt-step-text"><strong>Paste and send</strong> — the manager will verify and confirm.</div></div>
+      <div class="receipt-message-box" id="receiptMessage"></div>
+      <div class="receipt-actions">
+        <button class="btn-copy-receipt" id="copyReceiptBtn" onclick="copyReceipt()">📋 Copy Message</button>
+        <a class="btn-open-tg" href="https://t.me/DS461" target="_blank" rel="noopener">✈ Open @DS461</a>
+      </div>
+      <button class="btn-done-receipt" onclick="closeReceipt()">Done — Continue Shopping</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOASTS -->
+<div class="toast-container" id="toastContainer"></div>
+<script src="typing.js"></script>
+<script>
+// ── CRYPTO PRICES ──
+let BTC_PRICE = null, TRX_PRICE = null, pricesLoaded = false;
+
+async function fetchLivePrices() {
+  try {
+    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,tron&vs_currencies=usd',{cache:'no-store'});
+    if(!res.ok) throw new Error();
+    const d = await res.json();
+    BTC_PRICE = d.bitcoin.usd; TRX_PRICE = d.tron.usd; pricesLoaded = true;
+    const tick = document.getElementById('priceTicker');
+    if(tick){
+      const now = new Date().toLocaleTimeString();
+      tick.innerHTML = `<span class="ticker-btc">₿ BTC $${BTC_PRICE.toLocaleString()}</span><span class="ticker-sep">·</span><span class="ticker-trx">◈ TRX $${TRX_PRICE.toFixed(4)}</span><span class="ticker-sep">·</span><span class="ticker-usdt">₮ USDT $1.00</span><span class="ticker-time">Updated ${now}</span>`;
+    }
+    if(typeof currentFilter !== 'undefined') renderProducts(currentFilter);
+    renderCartItems();
+  } catch(e) {
+    if(!pricesLoaded){ BTC_PRICE=67420; TRX_PRICE=0.13; pricesLoaded=true; }
+    const tick = document.getElementById('priceTicker');
+    if(tick) tick.innerHTML=`<span style="color:rgba(255,255,255,0.3)">⚠ Could not fetch live prices — using cached</span>`;
+    if(typeof currentFilter !== 'undefined') renderProducts(currentFilter);
+    renderCartItems();
+  }
+}
+
+function imgUrl(gid){ return `https://drive.google.com/thumbnail?id=${gid}&sz=w800`; }
+function imgFallback(el,gid,attempt){
+  const s=[`https://drive.google.com/thumbnail?id=${gid}&sz=w800`,`https://lh3.googleusercontent.com/d/${gid}`,`https://drive.google.com/uc?export=view&id=${gid}`];
+  attempt=(attempt||0)+1;
+  if(attempt<s.length){el.src=s[attempt];el.setAttribute('data-attempt',attempt);}
+  else{el.style.display='none';el.parentElement.innerHTML='<span style="font-size:52px;opacity:0.3">🪙</span>';}
+}
+
+let cart = {};
+function addToCart(id){
+  const p=products.find(x=>x.id===id); if(!p) return;
+  cart[id]=cart[id]?{...cart[id],qty:cart[id].qty+1}:{...p,qty:1};
+  updateCartUI(); showToast(`${p.name} added to cart`);
+}
+function removeFromCart(id){delete cart[id];updateCartUI();renderCartItems();}
+function updateQty(id,delta){
+  if(!cart[id])return; cart[id].qty+=delta;
+  if(cart[id].qty<1){removeFromCart(id);return;}
+  updateCartUI();renderCartItems();
+}
+function getCartTotal(){return Object.values(cart).reduce((s,i)=>s+i.price*i.qty,0);}
+function getCartCount(){return Object.values(cart).reduce((s,i)=>s+i.qty,0);}
+function updateCartUI(){
+  const n=getCartCount(),el=document.getElementById('cartCount');
+  el.textContent=n; el.style.display=n>0?'flex':'none';
+}
+function renderCartItems(){
+  const el=document.getElementById('cartItems'),footer=document.getElementById('cartFooter');
+  const items=Object.values(cart);
+  if(items.length===0){
+    el.innerHTML=`<div class="cart-empty"><div class="cart-empty-icon">🛍</div><p class="cart-empty-text">YOUR CART IS EMPTY</p><p style="font-size:12px;color:rgba(255,255,255,0.35)">Add some pieces to get started</p></div>`;
+    footer.style.display='none';return;
+  }
+  el.innerHTML=items.map(i=>`<div class="cart-item"><div class="cart-item-img"><img src="${imgUrl(i.gid)}" alt="${i.name}" data-attempt="0" onerror="imgFallback(this,'${i.gid}',parseInt(this.getAttribute('data-attempt')))"></div><div class="cart-item-details"><p class="cart-item-name">${i.name}</p><p class="cart-item-meta">${i.color} · ${i.material} · $${i.price} each</p><div class="cart-item-row"><div class="qty-control"><button class="qty-btn" onclick="updateQty(${i.id},-1)">−</button><span class="qty-num">${i.qty}</span><button class="qty-btn" onclick="updateQty(${i.id},1)">+</button></div><span class="item-price">$${(i.price*i.qty).toFixed(2)}</span><button class="remove-item" onclick="removeFromCart(${i.id})">🗑</button></div></div></div>`).join('');
+  const total=getCartTotal();
+  document.getElementById('cartTotalDisplay').textContent=`$${total.toFixed(2)}`;
+  document.getElementById('cartCryptoTotal').textContent=(BTC_PRICE&&TRX_PRICE)?`≈ ${(total/BTC_PRICE).toFixed(5)} BTC · ${total.toFixed(2)} USDT · ${(total/TRX_PRICE).toFixed(0)} TRX`:`${total.toFixed(2)} USDT · live BTC/TRX loading…`;
+  footer.style.display='block';
+}
+function openCart(){renderCartItems();document.getElementById('cartOverlay').classList.add('open');document.getElementById('cartSidebar').classList.add('open');document.body.style.overflow='hidden';}
+function closeCart(){document.getElementById('cartOverlay').classList.remove('open');document.getElementById('cartSidebar').classList.remove('open');document.body.style.overflow='';}
+
+let selectedPayment=null;
+function updateModalAmounts(){
+  const total=getCartTotal(),items=Object.values(cart);
+  document.getElementById('modalItemsList').innerHTML=items.map(i=>`<li class="order-item-row"><div class="order-item-thumb"><img src="${imgUrl(i.gid)}" alt="${i.name}" loading="lazy" data-attempt="0" onerror="imgFallback(this,'${i.gid}',parseInt(this.getAttribute('data-attempt')))"></div><div class="order-item-info"><p class="order-item-name">${i.name}</p><p class="order-item-meta">${i.color} · ${i.material}</p></div><span class="order-item-qty">× ${i.qty}</span><span class="order-item-price">$${(i.price*i.qty).toFixed(2)}</span></li>`).join('');
+  document.getElementById('modalTotal').textContent=`$${total.toFixed(2)}`;
+  document.getElementById('btcUSD').textContent=`$${total.toFixed(2)}`;
+  document.getElementById('btcAmount').textContent=BTC_PRICE?`${(total/BTC_PRICE).toFixed(6)} BTC`:'—';
+  document.getElementById('usdtUSD').textContent=`$${total.toFixed(2)}`;
+  document.getElementById('usdtAmount').textContent=`${total.toFixed(2)} USDT`;
+  document.getElementById('trxUSD').textContent=`$${total.toFixed(2)}`;
+  document.getElementById('trxAmount').textContent=TRX_PRICE?`${(total/TRX_PRICE).toFixed(0)} TRX`:'—';
+  document.getElementById('modalBtcRate').textContent=BTC_PRICE?`₿ BTC $${BTC_PRICE.toLocaleString()}`:'₿ BTC —';
+  document.getElementById('modalTrxRate').textContent=TRX_PRICE?`◈ TRX $${TRX_PRICE.toFixed(4)}`:'◈ TRX —';
+}
+async function refreshModalPrices(){
+  const btn=document.getElementById('refreshBtn');btn.textContent='⟳ …';btn.classList.add('spinning');
+  await fetchLivePrices();updateModalAmounts();btn.textContent='⟳ Refresh';btn.classList.remove('spinning');showToast('Prices updated');
+}
+async function openPaymentModal(){
+  closeCart();
+  ['BTC','USDT','TRX'].forEach(t=>{document.getElementById('opt'+t).classList.remove('selected');document.getElementById('details'+t).classList.remove('active');});
+  selectedPayment=null;
+  ['fName','fTelegram','fContact','fAddress','fTxHash'].forEach(id=>{const el=document.getElementById(id);el.value='';el.classList.remove('error');});
+  document.getElementById('paymentModal').classList.add('open');document.body.style.overflow='hidden';
+  if(!pricesLoaded) await fetchLivePrices();
+  updateModalAmounts();
+}
+function closePaymentModal(){document.getElementById('paymentModal').classList.remove('open');document.body.style.overflow='';}
+function selectPayment(type){
+  selectedPayment=type;
+  ['btc','usdt','trx'].forEach(t=>{document.getElementById('opt'+t.toUpperCase()).classList.toggle('selected',t===type);document.getElementById('details'+t.toUpperCase()).classList.toggle('active',t===type);});
+}
+function copyAddress(addrId,btnId){
+  navigator.clipboard.writeText(document.getElementById(addrId).textContent.trim()).then(()=>{
+    const b=document.getElementById(btnId);b.textContent='✓ Copied!';b.classList.add('copied');
+    setTimeout(()=>{b.textContent='📋 Copy Address';b.classList.remove('copied');},2500);
+  });
+}
+function confirmPayment(){
+  if(!selectedPayment){showToast('Please select a payment currency first');return;}
+  const fields=[{id:'fName'},{id:'fTelegram'},{id:'fContact'},{id:'fAddress'},{id:'fTxHash'}];
+  let valid=true;
+  fields.forEach(f=>{const el=document.getElementById(f.id);if(!el.value.trim()){el.classList.add('error');valid=false;}else el.classList.remove('error');});
+  if(!valid){showToast('Please fill in all required fields');return;}
+  const name=document.getElementById('fName').value.trim(),telegram=document.getElementById('fTelegram').value.trim(),contact=document.getElementById('fContact').value.trim(),address=document.getElementById('fAddress').value.trim(),txHash=document.getElementById('fTxHash').value.trim();
+  const total=getCartTotal(),method={btc:'Bitcoin (BTC)',usdt:'Tether (USDT)',trx:'Tron (TRX)'}[selectedPayment];
+  const cryptoAmt=selectedPayment==='btc'?`${(total/BTC_PRICE).toFixed(6)} BTC  (@ $${BTC_PRICE.toLocaleString()}/BTC)`:selectedPayment==='usdt'?`${total.toFixed(2)} USDT`:`${(total/TRX_PRICE).toFixed(0)} TRX  (@ $${TRX_PRICE.toFixed(4)}/TRX)`;
+  const ref='DAATCHI-'+Math.random().toString(36).substr(2,6).toUpperCase(),date=new Date().toUTCString();
+  const itemLines=Object.values(cart).map(i=>`  • [${i.code}] ${i.name} (${i.color}) x${i.qty}  —  $${(i.price*i.qty).toFixed(2)}`).join('\n');
+  document.getElementById('receiptMessage').textContent=`🛍 NEW ORDER — DAATCHI Fashion\n━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📦 Order Ref : ${ref}\n📅 Date      : ${date}\n\n━━━ 🛒 ITEMS ━━━\n${itemLines}\n\n💰 Total     : $${total.toFixed(2)}\n💳 Paid with : ${method}\n🔗 Amount    : ${cryptoAmt}\n🧾 TX Hash   : ${txHash}\n\n━━━ 👤 CUSTOMER ━━━\n👤 Name     : ${name}\n✈ Telegram  : ${telegram}\n📧 Contact  : ${contact}\n📦 Address  : ${address}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━\nPlease confirm receipt and process my order. Thank you!`;
+  closePaymentModal();document.getElementById('receiptOverlay').classList.add('open');document.body.style.overflow='hidden';
+  cart={};updateCartUI();
+}
+function copyReceipt(){
+  navigator.clipboard.writeText(document.getElementById('receiptMessage').textContent).then(()=>{
+    const b=document.getElementById('copyReceiptBtn');b.textContent='✓ Copied! Now paste in Telegram';b.classList.add('copied');
+    setTimeout(()=>{b.innerHTML='📋 Copy Message';b.classList.remove('copied');},3500);
+  });
+}
+function closeReceipt(){document.getElementById('receiptOverlay').classList.remove('open');document.body.style.overflow='';}
+function showToast(msg){
+  const c=document.getElementById('toastContainer'),t=document.createElement('div');
+  t.className='toast';t.textContent=msg;c.appendChild(t);setTimeout(()=>t.remove(),3200);
+}
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60));
+
+fetchLivePrices();
+setInterval(fetchLivePrices,60000);
+</script>
+<script>
+document.getElementById('nav-technologies').classList.add('active-link');
+const products = [];
+</script>
 </body>
 </html>
