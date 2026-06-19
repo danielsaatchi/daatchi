@@ -1,226 +1,686 @@
-/* ==== Base styles ==== */
-
 @font-face {
-    font-family: 'AGENCY FB';
-    src: url('https://s3.amazonaws.com/FontsThatStartWithAgency/AgencyFB-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'AGENCY FB';
+  src: url('https://s3.amazonaws.com/FontsThatStartWithAgency/AgencyFB-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-    --white:     #fff;
-    --yellow:    #000;
-    --pink:      #C99C9A;
-    --black:     #000;
-    --dark:      #101010;
-    --link-pink: #C99C9A;   /* classic bootstrap‑style blue */
-    --bg-default: #000; /* black background */
-    --text-default: var(--white); /* Black text */
-    --nav-text: var(--white); /* white for nav links */
-    --footer-bg: var(--dark); /* Dark grey for footer */
-    --footer-text: #fff; /* White for footer text */
+  --white:   #fff;
+  --pink:    #C99C9A;
+  --black:   #000;
+  --dark:    #101010;
+  --card-bg: #040001;
+  --btc:     #F7931A;
+  --usdt:    #26A17B;
+  --trx:     #E8343B;
 }
 
-* {
-    box-sizing: border-box;
-}
+html { scroll-behavior: smooth; }
 
 body {
-    font-family: 'Agency FB', monospace;
-    margin: 0;
-    background: var(--bg-default);
-    color: var(--text-default);
-    line-height: 1.6;
+  font-family: 'AGENCY FB', monospace;
+  background: var(--black);
+  color: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* --- Global link style (everything but the menu) --- */
-a {
-    color: var(--link-pink);
-    text-decoration: none;
+a { color: var(--pink); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: #000;
+  border-bottom: 1px solid var(--pink);
+  transition: padding 0.3s;
 }
-a:hover {
-    text-decoration: underline;
-}
-
-
-/* ==== Layout ==== */
-
-.container {
-    width: 100%;
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-}
-
-.main-content {
-    padding: 2rem 0 3rem;
-}
-
-/* Header */
-.site-header {
-    background: var(--black);
-    color: var(--white);
-    padding: 1rem;
-    text-align: center;
-    border-bottom: 1px solid var(--white); /* Subtle separator */
-}
-
-.site-header h1 {
-    margin: 0 0 0.75rem;
-    letter-spacing: -0.04em;
-}
-
-/* Navigation */
-.site-nav {
-    background: #000; /* black background for nav */
-    border-bottom: 1px solid var(--pink);
-}
-
 .nav-inner {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    align-items: center;
-    padding: 0.75rem 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.75rem 2rem;
+  flex-wrap: wrap; gap: 1rem;
+}
+.nav-logo {
+  font-family: 'AGENCY FB', monospace;
+  font-size: 26px; font-weight: bold;
+  letter-spacing: 0.3em; color: var(--white);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--pink); }
+.nav-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+.nav-links a {
+  color: var(--white); text-decoration: none;
+  font-weight: bold; font-size: 13px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  position: relative; padding-bottom: 3px;
+}
+.nav-links a::after {
+  content: ""; position: absolute; left: 0; bottom: 0;
+  height: 2px; width: 0; background: var(--pink);
+  transition: width 0.24s ease-out;
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-links a.active-link::after { width: 100%; }
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+.cart-btn {
+  background: none; border: 1px solid var(--pink);
+  color: var(--white); padding: 7px 20px;
+  font-family: 'AGENCY FB', monospace; font-size: 13px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.2s; position: relative;
+}
+.cart-btn:hover { background: var(--pink); color: var(--black); }
+.cart-count {
+  position: absolute; top: -7px; right: -7px;
+  background: var(--pink); color: var(--black);
+  width: 18px; height: 18px; border-radius: 50%;
+  font-size: 10px; font-weight: bold;
+  display: none; align-items: center; justify-content: center;
 }
 
-.site-nav a {
-    font-weight: bold;
-    color: var(--nav-text); /* Black for nav links */
-    text-decoration: none;
-    position: relative;
-    padding-bottom: 0.2rem;
+/* ── HERO (shops/index) ── */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  position: relative; overflow: hidden;
+  padding-top: 90px;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg,
+    rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px,
+    rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
+  pointer-events: none; z-index: 2;
+}
+.hero-text {
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 100px 48px 80px; position: relative; z-index: 3;
+}
+.hero-eyebrow {
+  font-size: 11px; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--pink);
+  margin-bottom: 20px;
+}
+.hero-title {
+  font-family: 'AGENCY FB', monospace;
+  font-size: clamp(52px, 7vw, 90px);
+  font-weight: bold; line-height: 1.0;
+  color: var(--white); margin-bottom: 24px;
+  letter-spacing: 0.05em;
+}
+.hero-title em { font-style: normal; color: var(--white); }
+.hero-sub {
+  max-width: 380px; color: rgba(255,255,255,0.55);
+  font-size: 14px; line-height: 1.8; margin-bottom: 40px;
+}
+.hero-cta { display: inline-flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--pink); color: var(--black);
+  border: none; padding: 13px 32px;
+  font-family: 'AGENCY FB', monospace; font-size: 13px;
+  font-weight: bold; letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.2s; display: inline-block; text-decoration: none;
+}
+.btn-primary:hover { background: #d4b0ae; text-decoration: none; }
+.btn-ghost {
+  background: none; color: var(--white);
+  border: 1px solid rgba(255,255,255,0.25); padding: 13px 32px;
+  font-family: 'AGENCY FB', monospace; font-size: 13px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.2s; text-decoration: none;
+  display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--pink); color: var(--pink); text-decoration: none; }
+.hero-image { position: relative; overflow: hidden; background: #040001; }
+.hero-image-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, #000 0%, transparent 35%);
+  z-index: 1;
+}
+.hero-badge {
+  position: absolute; bottom: 40px; right: 40px; z-index: 3;
+  border: 1px solid rgba(201,156,154,0.4); padding: 18px 22px;
+  background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+}
+.hero-badge-label {
+  font-size: 9px; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--pink); margin-bottom: 5px;
+}
+.hero-badge-text {
+  font-family: 'AGENCY FB', monospace;
+  font-size: 24px; font-weight: bold; color: var(--white);
 }
 
-.site-nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    width: 0;
-    background: var(--link-pink); /* pink underline on hover */
-    transition: width 0.24s ease-out;
+/* ── PAGE HERO (inner pages) ── */
+.page-hero {
+  padding: 160px 48px 64px;
+  border-bottom: 1px solid rgba(201,156,154,0.15);
+  position: relative;
+}
+.page-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg,
+    rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px,
+    rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
+  pointer-events: none;
+}
+.page-eyebrow {
+  font-size: 11px; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--pink);
+  margin-bottom: 16px;
+}
+.page-title {
+  font-family: 'AGENCY FB', monospace;
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: bold; line-height: 1.0;
+  color: var(--white); margin-bottom: 16px;
+  letter-spacing: 0.05em;
+}
+.page-title em { font-style: normal; color: var(--pink); }
+.page-sub {
+  max-width: 560px; color: rgba(255,255,255,0.45);
+  font-size: 14px; line-height: 1.8;
 }
 
-.site-nav a:hover::after {
-    width: 100%;
+/* ── CRYPTO BAR ── */
+.crypto-bar {
+  background: var(--dark);
+  padding: 14px 48px;
+  display: flex; align-items: center; justify-content: center;
+  gap: 32px; flex-wrap: wrap;
+  border-top: 1px solid rgba(201,156,154,0.15);
+  border-bottom: 1px solid rgba(201,156,154,0.15);
+}
+.crypto-bar-label {
+  font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,255,255,0.4);
+}
+.crypto-badge {
+  display: flex; align-items: center; gap: 7px;
+  padding: 5px 14px; border: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px; letter-spacing: 0.1em; font-weight: bold;
+  position: relative; overflow: hidden;
+}
+.crypto-badge::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+  transform: translateX(-100%); animation: shimmer 3s infinite;
+}
+@keyframes shimmer { 0%{transform:translateX(-100%)} 100%{transform:translateX(200%)} }
+.crypto-badge.btc  { color: var(--btc);  border-color: rgba(247,147,26,0.25); }
+.crypto-badge.usdt { color: var(--usdt); border-color: rgba(38,161,123,0.25); }
+.crypto-badge.trx  { color: var(--trx);  border-color: rgba(232,52,59,0.25); }
+.crypto-icon { font-size: 15px; }
+
+/* ── SHOP SECTION ── */
+.section { padding: 80px 48px; }
+.section-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 48px; padding-bottom: 20px;
+  border-bottom: 1px solid rgba(201,156,154,0.2);
+}
+.section-title {
+  font-family: 'AGENCY FB', monospace;
+  font-size: 32px; font-weight: bold; letter-spacing: 0.1em;
+  color: var(--white);
+}
+.section-title em { font-style: italic; color: var(--pink); }
+.section-count {
+  font-size: 11px; letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.4); text-transform: uppercase;
+}
+.filter-tabs { display: flex; gap: 2px; margin-bottom: 36px; flex-wrap: wrap; }
+.filter-tab {
+  background: none; border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.45); padding: 7px 18px;
+  font-family: 'AGENCY FB', monospace; font-size: 12px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.2s;
+}
+.filter-tab.active,.filter-tab:hover {
+  background: rgba(201,156,154,0.12);
+  border-color: rgba(201,156,154,0.45); color: var(--pink);
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2px;
+}
+.product-card { position: relative; cursor: pointer; background: var(--card-bg); overflow: hidden; }
+.product-image { aspect-ratio: 3/4; position: relative; overflow: hidden; background: var(--card-bg); }
+.product-visual {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+  overflow: hidden;
+}
+.product-visual img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block; transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.product-card:hover .product-visual img { transform: scale(1.05); }
+.product-actions {
+  position: absolute; bottom: 0; left: 0; right: 0; padding: 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+  transform: translateY(100%); transition: transform 0.3s ease;
+  display: flex; gap: 6px;
+}
+.product-card:hover .product-actions { transform: translateY(0); }
+.add-to-cart {
+  flex: 1; background: var(--pink); color: var(--black);
+  border: none; padding: 10px 14px;
+  font-family: 'AGENCY FB', monospace; font-size: 11px;
+  font-weight: bold; letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; transition: background 0.2s;
+}
+.add-to-cart:hover { background: #d4b0ae; }
+.wishlist-btn {
+  background: rgba(0,0,0,0.8); color: var(--white);
+  border: 1px solid rgba(255,255,255,0.2); padding: 10px 13px;
+  cursor: pointer; font-size: 14px; transition: all 0.25s;
+}
+.wishlist-btn:hover { border-color: var(--pink); color: var(--pink); }
+.wishlist-btn.liked {
+  background: rgba(201,156,154,0.15);
+  border-color: var(--pink); color: var(--pink);
+  animation: heartPop 0.3s ease;
+}
+@keyframes heartPop { 0%{transform:scale(1)} 50%{transform:scale(1.4)} 100%{transform:scale(1)} }
+.product-tag {
+  position: absolute; top: 14px; left: 14px;
+  background: var(--pink); color: var(--black);
+  font-size: 9px; font-weight: bold; letter-spacing: 0.15em;
+  text-transform: uppercase; padding: 3px 9px;
+}
+.product-tag.new  { background: var(--white); }
+.product-tag.sale { background: #C94C4C; color: var(--white); }
+.product-info { padding: 14px; background: var(--card-bg); }
+.product-meta-badges { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
+.meta-badge {
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 8px; border: 1px solid rgba(201,156,154,0.25);
+  color: rgba(255,255,255,0.4);
+}
+.meta-badge.color-badge { border-color: rgba(201,156,154,0.3); color: var(--pink); }
+.product-code { font-size: 9px; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; margin-bottom: 6px; }
+.product-name {
+  font-family: 'AGENCY FB', monospace; font-size: 17px;
+  letter-spacing: 0.08em; color: var(--white); margin-bottom: 5px;
+}
+.product-category {
+  font-size: 10px; letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.4); text-transform: uppercase; margin-bottom: 9px;
+}
+.product-price { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.price-usd { font-size: 16px; color: var(--white); font-weight: bold; }
+.price-crypto { font-size: 10px; color: rgba(255,255,255,0.35); }
+
+/* ── INNER PAGE CONTENT ── */
+.page-content { padding: 64px 48px 80px; }
+.content-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2px; margin-top: 48px;
+}
+.content-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(201,156,154,0.15);
+  padding: 32px;
+  transition: border-color 0.2s;
+}
+.content-card:hover { border-color: rgba(201,156,154,0.4); }
+.card-index {
+  font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--pink); margin-bottom: 14px;
+}
+.card-title {
+  font-family: 'AGENCY FB', monospace;
+  font-size: 20px; letter-spacing: 0.08em;
+  color: var(--white); margin-bottom: 10px; line-height: 1.2;
+}
+.card-body {
+  font-size: 13px; color: rgba(255,255,255,0.5);
+  line-height: 1.8; letter-spacing: 0.03em;
+}
+.card-tag {
+  display: inline-block; margin-top: 14px;
+  font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 3px 10px; border: 1px solid rgba(201,156,154,0.3); color: var(--pink);
+}
+.section-intro {
+  max-width: 640px;
+  font-size: 14px; color: rgba(255,255,255,0.4);
+  line-height: 1.8; margin-bottom: 0;
+}
+.section-divider {
+  border: none; border-top: 1px solid rgba(201,156,154,0.15);
+  margin: 48px 0;
 }
 
-/* Cards / Sections */
-.card {
-    background: #040001; /* Light grey background for cards */
-    border-radius: 10px; /* Slightly rounded corners */
-    border: 1px solid var(--link-pink); /* Dark grey border */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-    padding: 1.75rem 1.6rem;
-    margin-top: 1.5rem;
-    position: relative;
-    overflow: hidden;
+/* Studio index special layout */
+.studio-features {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2px; margin-top: 48px;
+}
+.studio-feature {
+  background: var(--card-bg);
+  border: 1px solid rgba(201,156,154,0.12);
+  padding: 28px 24px;
+  transition: border-color 0.2s;
+}
+.studio-feature:hover { border-color: rgba(201,156,154,0.35); }
+.feature-prefix { font-size: 11px; color: var(--pink); letter-spacing: 0.2em; margin-bottom: 8px; }
+.feature-title {
+  font-family: 'AGENCY FB', monospace; font-size: 16px;
+  letter-spacing: 0.06em; color: var(--white); line-height: 1.3;
 }
 
-.card h2 {
-    margin: 0 0 0.75rem;
-    font-size: 1.45rem;
-    color: var(--white);
+/* History timeline */
+.timeline { margin-top: 40px; }
+.timeline-item {
+  display: flex; gap: 24px; align-items: flex-start;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(201,156,154,0.08);
 }
-
-.card p {
-    margin: 0.3rem 0;
-    line-height: 1.6;
-    color: var(--white); /* white for card text */
+.timeline-year {
+  font-family: 'AGENCY FB', monospace;
+  font-size: 22px; font-weight: bold; color: var(--pink);
+  min-width: 64px; letter-spacing: 0.05em; line-height: 1;
+  padding-top: 2px;
 }
+.timeline-text { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.8; }
+.timeline-text strong { color: var(--white); font-size: 15px; display: block; margin-bottom: 4px; }
 
-/* Footer */
-.site-footer {
-    background: var(--footer-bg);
-    color: var(--footer-text);
-    padding: 1.2rem 0 1.8rem;
-    margin-top: 2rem;
-    text-align: center;
-    font-size: 0.9rem;
+/* Creator card */
+.creator-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(201,156,154,0.2);
+  padding: 40px; margin-top: 48px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+  align-items: start;
 }
-
-/* Contact form */
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-top: 0.75rem;
+.creator-name {
+  font-family: 'AGENCY FB', monospace;
+  font-size: 36px; font-weight: bold; letter-spacing: 0.08em;
+  color: var(--white); margin-bottom: 10px;
 }
-
-.contact-form label {
-    font-size: 0.9rem;
-    color: var(--dark); /* Dark grey for labels */
+.creator-title {
+  font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--pink); margin-bottom: 0;
 }
-
-.contact-form input,
-.contact-form textarea {
-    background: #fff; /* White background for inputs */
-    border-radius: 8px; /* Rounded inputs */
-    border: 1px solid var(--white); /* Dark grey border */
-    padding: 0.6rem 0.75rem;
-    color: var(--black); /* Black text */
-    font-family: inherit;
-    font-size: 0.95rem;
+.creator-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.creator-links a {
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 6px 14px; border: 1px solid rgba(201,156,154,0.3);
+  color: rgba(255,255,255,0.5); transition: all 0.2s; text-decoration: none;
 }
-
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-    color: rgba(51, 51, 51, 0.7); /* Dark grey placeholder */
+.creator-links a:hover { border-color: var(--pink); color: var(--pink); text-decoration: none; }
+.edu-label {
+  font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--pink); margin-bottom: 16px;
 }
-
-.contact-form button {
-    align-self: flex-start;
-    margin-top: 0.5rem;
-    padding: 0.55rem 1.4rem;
-    border-radius: 20px; /* Pill-shaped button */
-    border: none;
-    background: var(--link-blue); /* Blue button */
-    color: #fff; /* White text on button */
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3); /* Blue shadow */
+.edu-item {
+  display: flex; gap: 12px; align-items: baseline;
+  margin-bottom: 12px; padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
+.edu-item:last-child { border-bottom: none; }
+.edu-prefix { font-size: 11px; color: var(--pink); flex-shrink: 0; }
+.edu-name { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
 
-/* ==== Typing animation styles ==== */
-.type-line {
-    display: inline-block;
-    white-space: pre-wrap;
-    min-height: 1em;
+/* Contact page */
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 48px;
 }
-
-.typing-cursor {
-    display: inline-block;
-    margin-left: 1px;
-    color: var(--link-pink); /* Blue cursor */
-    animation: blink 0.8s steps(1) infinite;
+.contact-item {
+  background: var(--card-bg);
+  border: 1px solid rgba(201,156,154,0.12);
+  padding: 32px;
+  transition: border-color 0.2s;
 }
-
-@keyframes blink {
-    0%, 50% { opacity: 1; }
-    50.01%, 100% { opacity: 0; }
+.contact-item:hover { border-color: rgba(201,156,154,0.4); }
+.contact-platform {
+  font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--pink); margin-bottom: 10px;
 }
+.contact-handle {
+  font-family: 'AGENCY FB', monospace; font-size: 20px;
+  letter-spacing: 0.06em; color: var(--white); margin-bottom: 6px;
+}
+.contact-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.7; }
 
-/* Responsive tweaks */
-@media (max-width: 640px) {
-    .site-header h1 {
-        font-size: 1.9rem;
-    }
+/* ── PRICE TICKER ── */
+.price-ticker {
+  background: var(--card-bg);
+  border-bottom: 1px solid rgba(201,156,154,0.15);
+  padding: 6px 48px;
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; flex-wrap: wrap; font-size: 11px;
+  letter-spacing: 0.1em; font-family: 'AGENCY FB', monospace;
+  min-height: 30px;
+}
+.ticker-btc  { color: var(--btc);  font-weight: bold; }
+.ticker-trx  { color: var(--trx);  font-weight: bold; }
+.ticker-usdt { color: var(--usdt); font-weight: bold; }
+.ticker-sep  { color: rgba(255,255,255,0.2); }
+.ticker-time { color: rgba(255,255,255,0.25); font-size: 10px; }
+@keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
 
-    .nav-inner {
-        flex-wrap: wrap;
-        row-gap: 0.35rem;
-        justify-content: center; /* Center nav items on small screens */
-    }
+/* ── CART SIDEBAR ── */
+.cart-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(4px); z-index: 200;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.cart-overlay.open { opacity: 1; pointer-events: all; }
+.cart-sidebar {
+  position: fixed; top: 0; right: 0; bottom: 0; width: 420px; max-width: 100vw;
+  background: var(--dark); border-left: 1px solid var(--pink);
+  z-index: 201; transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+  display: flex; flex-direction: column;
+}
+.cart-sidebar.open { transform: translateX(0); }
+.cart-header {
+  padding: 24px 28px 20px;
+  border-bottom: 1px solid rgba(201,156,154,0.2);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.cart-title { font-family: 'AGENCY FB', monospace; font-size: 20px; letter-spacing: 0.12em; font-weight: bold; }
+.cart-close { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 22px; cursor: pointer; transition: color 0.2s; line-height: 1; }
+.cart-close:hover { color: var(--pink); }
+.cart-items { flex: 1; overflow-y: auto; padding: 20px 28px; }
+.cart-item { display: flex; gap: 14px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.cart-item-img { width: 68px; height: 85px; flex-shrink: 0; background: #0a0005; overflow: hidden; border: 1px solid rgba(201,156,154,0.15); display:flex; align-items:center; justify-content:center; font-size:28px; }
+.cart-item-img img { width:100%; height:100%; object-fit:cover; }
+.cart-item-details { flex: 1; }
+.cart-item-name { font-family: 'AGENCY FB', monospace; font-size: 15px; letter-spacing: 0.06em; margin-bottom: 3px; }
+.cart-item-meta { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+.cart-item-row { display: flex; align-items: center; justify-content: space-between; }
+.qty-control { display: flex; align-items: center; gap: 10px; border: 1px solid rgba(201,156,154,0.3); }
+.qty-btn { background: none; border: none; color: var(--white); width: 28px; height: 28px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; font-family: monospace; }
+.qty-btn:hover { background: rgba(201,156,154,0.15); }
+.qty-num { font-size: 13px; min-width: 14px; text-align: center; }
+.item-price { font-size: 14px; color: var(--white); font-weight: bold; }
+.remove-item { background: none; border: none; color: rgba(255,255,255,0.35); cursor: pointer; font-size: 15px; padding: 2px; transition: color 0.2s; }
+.remove-item:hover { color: #C94C4C; }
+.cart-empty { text-align: center; padding: 60px 20px; }
+.cart-empty-icon { font-size: 40px; margin-bottom: 14px; opacity: 0.3; }
+.cart-empty-text { font-family: 'AGENCY FB', monospace; font-size: 18px; letter-spacing: 0.1em; margin-bottom: 6px; color: var(--white); }
+.cart-footer { padding: 20px 28px; border-top: 1px solid rgba(201,156,154,0.2); }
+.cart-total { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+.total-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.total-amount { font-family: 'AGENCY FB', monospace; font-size: 26px; color: var(--white); font-weight: bold; }
+.total-crypto { font-size: 10px; color: rgba(255,255,255,0.35); text-align: right; margin-bottom: 16px; }
+.checkout-btn { width: 100%; background: var(--pink); color: var(--black); border: none; padding: 14px; font-family: 'AGENCY FB', monospace; font-size: 13px; font-weight: bold; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; margin-bottom: 9px; }
+.checkout-btn:hover { background: #d4b0ae; }
+.crypto-checkout-note { text-align: center; font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 0.05em; }
+.crypto-checkout-note .btc-c  { color: var(--btc); }
+.crypto-checkout-note .usdt-c { color: var(--usdt); }
+.crypto-checkout-note .trx-c  { color: var(--trx); }
 
-    .card {
-        padding: 1.4rem 1.25rem;
-    }
+/* ── PAYMENT MODAL ── */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(8px); z-index: 300; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; padding: 20px; overflow-y: auto; }
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal { background: var(--dark); border: 1px solid var(--pink); width: 540px; max-width: 100%; max-height: 90vh; overflow-y: auto; transform: translateY(20px); transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94); }
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-header { padding: 28px 32px 20px; border-bottom: 1px solid rgba(201,156,154,0.2); display: flex; align-items: center; justify-content: space-between; }
+.modal-title { font-family: 'AGENCY FB', monospace; font-size: 20px; letter-spacing: 0.15em; font-weight: bold; }
+.modal-close { background: none; border: none; color: rgba(255,255,255,0.45); font-size: 22px; cursor: pointer; line-height: 1; transition: color 0.2s; }
+.modal-close:hover { color: var(--pink); }
+.modal-body { padding: 28px 32px; }
+.order-summary { background: rgba(0,0,0,0.5); border: 1px solid rgba(201,156,154,0.2); padding: 18px 20px; margin-bottom: 24px; }
+.order-summary-title { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
+.order-items-list { list-style: none; margin-bottom: 12px; border-bottom: 1px solid rgba(201,156,154,0.15); padding-bottom: 12px; }
+.order-item-row { display: flex; align-items: center; gap: 10px; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.order-item-row:last-child { border-bottom: none; }
+.order-item-thumb { width: 34px; height: 34px; flex-shrink: 0; background: #0a0005; overflow: hidden; border: 1px solid rgba(201,156,154,0.15); }
+.order-item-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.order-item-info { flex: 1; min-width: 0; }
+.order-item-name { font-family: 'AGENCY FB', monospace; font-size: 12px; letter-spacing: 0.05em; color: var(--white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.order-item-meta { font-size: 10px; color: rgba(255,255,255,0.35); }
+.order-item-qty { font-size: 10px; color: rgba(255,255,255,0.35); white-space: nowrap; }
+.order-item-price { font-family: 'AGENCY FB', monospace; font-size: 13px; color: var(--pink); font-weight: bold; white-space: nowrap; min-width: 48px; text-align: right; }
+.order-summary-total-row { display: flex; align-items: baseline; justify-content: space-between; }
+.order-summary-total-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.order-summary-total { font-family: 'AGENCY FB', monospace; font-size: 30px; color: var(--white); font-weight: bold; }
+.payment-label { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--pink); margin-bottom: 12px; }
+.payment-options { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.payment-option { flex: 1; min-width: 100px; padding: 14px 10px; border: 2px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.4); cursor: pointer; transition: all 0.2s; text-align: left; color: var(--white); }
+.payment-option:hover { border-color: rgba(201,156,154,0.3); }
+.payment-option.selected.btc  { border-color: var(--btc);  background: rgba(247,147,26,0.07); }
+.payment-option.selected.usdt { border-color: var(--usdt); background: rgba(38,161,123,0.07); }
+.payment-option.selected.trx  { border-color: var(--trx);  background: rgba(232,52,59,0.07); }
+.payment-option-icon { font-size: 22px; margin-bottom: 7px; display: block; }
+.payment-option-name { font-family: 'AGENCY FB', monospace; font-size: 14px; letter-spacing: 0.08em; margin-bottom: 2px; }
+.payment-option-sub { font-size: 10px; color: rgba(255,255,255,0.4); }
+.payment-details { display: none; margin-bottom: 10px; }
+.payment-details.active { display: block; }
+.payment-amount-box { display: flex; gap: 8px; margin-bottom: 14px; }
+.amount-card { flex: 1; padding: 12px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.07); text-align: center; }
+.amount-label { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
+.amount-value { font-family: 'AGENCY FB', monospace; font-size: 14px; font-weight: bold; color: var(--white); }
+.amount-value.btc-color  { color: var(--btc); }
+.amount-value.usdt-color { color: var(--usdt); }
+.amount-value.trx-color  { color: var(--trx); }
+.wallet-box { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 14px 16px; margin-bottom: 12px; }
+.wallet-label { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 7px; }
+.wallet-address { font-family: 'AGENCY FB', monospace; font-size: 12px; color: var(--white); word-break: break-all; line-height: 1.7; letter-spacing: 0.03em; }
+.copy-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 9px; background: none; border: 1px solid rgba(201,156,154,0.3); color: rgba(255,255,255,0.5); padding: 6px 14px; font-family: 'AGENCY FB', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+.copy-btn:hover { border-color: var(--pink); color: var(--pink); }
+.copy-btn.copied { border-color: var(--usdt); color: var(--usdt); }
+.payment-notice { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.7; padding: 12px 14px; border-left: 2px solid rgba(201,156,154,0.5); background: rgba(201,156,154,0.05); margin-bottom: 16px; }
+.form-section-title { font-family: 'AGENCY FB', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--pink); margin: 20px 0 14px; padding-bottom: 8px; border-bottom: 1px solid rgba(201,156,154,0.2); }
+.form-row { margin-bottom: 12px; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+.form-label { display: block; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 5px; }
+.form-label .req { color: var(--pink); margin-left: 2px; }
+.form-input,.form-textarea { width: 100%; background: rgba(4,0,1,0.8); border: 1px solid rgba(201,156,154,0.25); color: var(--white); padding: 10px 13px; font-family: 'AGENCY FB', monospace; font-size: 13px; outline: none; transition: border-color 0.2s; resize: none; letter-spacing: 0.04em; }
+.form-input:focus,.form-textarea:focus { border-color: var(--pink); }
+.form-input::placeholder,.form-textarea::placeholder { color: rgba(255,255,255,0.25); }
+.form-input.error { border-color: #C94C4C !important; }
+.confirm-payment-btn { width: 100%; background: var(--pink); color: var(--black); border: none; padding: 14px; font-family: 'AGENCY FB', monospace; font-size: 13px; font-weight: bold; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; margin-top: 6px; }
+.confirm-payment-btn:hover { background: #d4b0ae; }
+.price-refresh-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding: 10px 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(201,156,154,0.15); flex-wrap: wrap; gap: 8px; }
+.price-live-label { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; }
+.price-live-values { font-size: 12px; font-family: 'AGENCY FB', monospace; font-weight: bold; }
+.price-live-values .btc-c { color: var(--btc); }
+.price-live-values .trx-c { color: var(--trx); margin-left: 14px; }
+.btn-refresh { background: none; border: 1px solid rgba(201,156,154,0.3); color: var(--pink); padding: 4px 12px; font-family: 'AGENCY FB', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+.btn-refresh:hover { background: rgba(201,156,154,0.1); }
+.btn-refresh.spinning { pointer-events:none; opacity:0.5; }
 
-    main {
-        padding: 1.5rem; /* Adjust main padding for smaller screens */
-    }
+/* ── RECEIPT ── */
+.receipt-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(10px); z-index: 400; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; padding: 20px; }
+.receipt-overlay.open { opacity: 1; pointer-events: all; }
+.receipt-box { background: var(--dark); border: 1px solid var(--pink); width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; transform: translateY(20px); transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94); }
+.receipt-overlay.open .receipt-box { transform: translateY(0); }
+.receipt-header { padding: 28px 32px 20px; border-bottom: 1px solid rgba(201,156,154,0.2); text-align: center; }
+.receipt-check { font-size: 36px; margin-bottom: 10px; }
+.receipt-title { font-family: 'AGENCY FB', monospace; font-size: 24px; letter-spacing: 0.15em; color: var(--white); margin-bottom: 6px; }
+.receipt-sub { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+.receipt-body { padding: 24px 32px; }
+.receipt-step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px; }
+.receipt-step-num { width: 24px; height: 24px; flex-shrink: 0; background: rgba(201,156,154,0.12); border: 1px solid rgba(201,156,154,0.4); color: var(--pink); font-size: 11px; font-weight: bold; display: flex; align-items: center; justify-content: center; font-family: 'AGENCY FB', monospace; }
+.receipt-step-text { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.7; padding-top: 2px; }
+.receipt-step-text strong { color: var(--white); }
+.receipt-step-text .tg-handle { color: #229ED9; font-weight: bold; }
+.receipt-message-box { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-left: 3px solid var(--pink); padding: 14px 16px; margin: 18px 0; font-size: 11px; line-height: 1.9; color: var(--white); white-space: pre-wrap; word-break: break-word; font-family: 'AGENCY FB', monospace; max-height: 260px; overflow-y: auto; letter-spacing: 0.03em; }
+.receipt-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn-copy-receipt { flex: 1; background: var(--pink); color: var(--black); border: none; padding: 13px 18px; font-family: 'AGENCY FB', monospace; font-size: 12px; font-weight: bold; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 7px; }
+.btn-copy-receipt:hover { background: #d4b0ae; }
+.btn-copy-receipt.copied { background: var(--usdt); color: white; }
+.btn-open-tg { flex: 1; background: #229ED9; color: white; border: none; padding: 13px 18px; font-family: 'AGENCY FB', monospace; font-size: 12px; font-weight: bold; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 7px; }
+.btn-open-tg:hover { background: #1a8ec4; text-decoration: none; }
+.btn-done-receipt { width: 100%; margin-top: 8px; background: none; color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.12); padding: 11px; font-family: 'AGENCY FB', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+.btn-done-receipt:hover { border-color: var(--pink); color: var(--pink); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark); padding: 56px 48px 36px;
+  border-top: 1px solid rgba(201,156,154,0.2); margin-top: 80px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 48px;
+}
+.footer-logo {
+  font-family: 'AGENCY FB', monospace; font-size: 22px;
+  font-weight: bold; letter-spacing: 0.3em; color: var(--white); margin-bottom: 14px;
+}
+.footer-logo span { color: var(--pink); }
+.footer-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.8; max-width: 260px; margin-bottom: 20px; }
+.footer-crypto-icons { display: flex; gap: 8px; flex-wrap: wrap; }
+.footer-crypto { padding: 5px 11px; border: 1px solid rgba(255,255,255,0.1); font-size: 10px; font-weight: bold; letter-spacing: 0.1em; }
+.footer-crypto.btc  { color: var(--btc);  border-color: rgba(247,147,26,0.25); }
+.footer-crypto.usdt { color: var(--usdt); border-color: rgba(38,161,123,0.25); }
+.footer-crypto.trx  { color: var(--trx);  border-color: rgba(232,52,59,0.25); }
+.footer-col-title { font-family: 'AGENCY FB', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink); margin-bottom: 18px; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 9px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--pink); text-decoration: none; }
+.footer-bottom { border-top: 1px solid rgba(201,156,154,0.15); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.3); }
+.footer-policy { display: flex; gap: 20px; }
+.footer-policy a { font-size: 11px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+.footer-policy a:hover { color: var(--pink); }
+
+/* ── TOAST ── */
+.toast-container { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 500; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+.toast { background: var(--dark); color: var(--white); padding: 11px 22px; border: 1px solid var(--pink); font-family: 'AGENCY FB', monospace; font-size: 12px; letter-spacing: 0.06em; transform: translateY(20px); opacity: 0; white-space: nowrap; animation: toastIn 0.3s forwards, toastOut 0.3s forwards 2.7s; }
+@keyframes toastIn { to { transform: translateY(0); opacity: 1; } }
+@keyframes toastOut { to { transform: translateY(-10px); opacity: 0; } }
+
+/* ── TYPING ANIMATION ── */
+.type-line { display: inline-block; white-space: pre-wrap; min-height: 1em; }
+.typing-cursor { display: inline-block; margin-left: 1px; color: var(--pink); animation: blink 0.8s steps(1) infinite; }
+@keyframes blink { 0%,50%{opacity:1} 50.01%,100%{opacity:0} }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-text { padding: 100px 24px 60px; }
+  .hero-image { display: none; }
+  .section { padding: 60px 24px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .crypto-bar { padding: 14px 24px; gap: 16px; }
+  .page-hero { padding: 120px 24px 48px; }
+  .page-content { padding: 40px 24px 60px; }
+  .creator-card { grid-template-columns: 1fr; gap: 32px; }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .nav-inner { padding: 0.6rem 1rem; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 14px; text-align: center; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .cart-sidebar { width: 100vw; }
+  .form-row-2 { grid-template-columns: 1fr; }
+  .payment-options { flex-direction: column; }
 }
