@@ -2,7 +2,7 @@
 Website of DAATCHI Studio [4] Fashion Technology Design, DSDT Studios
 
 ## theme developed by🛋️ONSOFA.ai
-ONSOFA Studio [4] Artificial General Intelligence 
+ONSOFA Studio [4] Artificial Intelligence 
 
 for more info 🌐 **[original repo by onsofa](https://github.com/danielsaatchi/onsofa/)**
 
@@ -14,7 +14,7 @@ daatchi/docs/
 ├── index.html                 # Home page (main page)
 ├── projects.html              # Projects page
 ├── publications.html          # Publications page
-├── products.html              # Products page
+├── designs.html               # Designs page
 ├── contact.html               # Contact-us page
 ├── style.css                  # All CSS rules
 ├── typing.js                  # Typing animation logic
@@ -35,6 +35,8 @@ daatchi/docs/
 3. In Settings → Pages → Source, select `main` → `/docs`.
 4. Afterthat, this site will be live at `https://danielsaatchi.github.io/daatchi`.
 
-
+## Update note (v0.2.1)
+1. Bugs are fixed for v0.1.3
+2. MCP for crypto/shop/AI agents are added
 
 Happy hacking! 🚀
