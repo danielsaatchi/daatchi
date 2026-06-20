@@ -37,7 +37,7 @@
     <h1 class="hero-title">
       <span class="type-line" data-delay="500">Land of</span><br>
       <span class="type-line" data-delay="900">Luxuries</span><br>
-      <span style="color:#C0BFBE;font-style:normal;" class="type-line" data-delay="1300">U Love.</span>
+      <span style="color:#C0BFBE;font-style:normal;" class="type-line" id="hero-ulove" data-delay="1300">U Love.</span>
     </h1>
     <p class="hero-sub type-line" data-delay="1700">Curated accessories — jewelry, leather goods &amp; more. Pay with Bitcoin, Tether, or Tron — seamlessly, privately, securely.</p>
     <div class="hero-cta">
@@ -239,11 +239,21 @@
       <div class="form-row-2">
         <div>
           <label class="form-label">Telegram ID <span class="req">*</span></label>
-          <input class="form-input" id="fTelegram" type="text" placeholder="@username or 123456789" />
+          <input class="form-input" id="fTelegram" type="text" placeholder="@username" />
         </div>
         <div>
-          <label class="form-label">Email or Phone <span class="req">*</span></label>
-          <input class="form-input" id="fContact" type="text" placeholder="email@mail.com or +1234…" />
+          <label class="form-label">Instagram ID <span class="req">*</span></label>
+          <input class="form-input" id="fInstagram" type="text" placeholder="@yourhandle" />
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div>
+          <label class="form-label">Email <span class="req">*</span></label>
+          <input class="form-input" id="fEmail" type="email" placeholder="email@mail.com" />
+        </div>
+        <div>
+          <label class="form-label">Phone Number <span class="req">*</span></label>
+          <input class="form-input" id="fPhone" type="tel" placeholder="+1 234 567 8900" />
         </div>
       </div>
       <div class="form-row">
@@ -269,8 +279,8 @@
     </div>
     <div class="receipt-body">
       <div class="receipt-step"><div class="receipt-step-num">1</div><div class="receipt-step-text"><strong>Copy</strong> the receipt message below.</div></div>
-      <div class="receipt-step"><div class="receipt-step-num">2</div><div class="receipt-step-text">Open Telegram → <span class="tg-handle">@DS461</span> — tap the blue button.</div></div>
-      <div class="receipt-step"><div class="receipt-step-num">3</div><div class="receipt-step-text"><strong>Paste and send</strong> — the manager will verify and confirm.</div></div>
+      <div class="receipt-step"><div class="receipt-step-num">2</div><div class="receipt-step-text">Open Telegram → <span class="tg-handle">@DS461</span> — tap the blue button, or on Instagram <span class="tg-handle">@daatchi.official</span> &gt;/ Message.</div></div>
+      <div class="receipt-step"><div class="receipt-step-num">3</div><div class="receipt-step-text"><strong>Paste and send</strong> the copied receipt — the manager will verify your transaction and confirm your order shortly.</div></div>
       <div class="receipt-message-box" id="receiptMessage"></div>
       <div class="receipt-actions">
         <button class="btn-copy-receipt" id="copyReceiptBtn" onclick="copyReceipt()">📋 Copy Message</button>
@@ -284,6 +294,22 @@
 <!-- TOASTS -->
 <div class="toast-container" id="toastContainer"></div>
 <script src="typing.js"></script>
+<script>
+// Re-color "U" in "U Love." after typing animation completes
+(function(){
+  var el = document.getElementById('hero-ulove');
+  if(!el) return;
+  var observer = new MutationObserver(function(){
+    var text = el.textContent;
+    if(text.indexOf('U') === 0){
+      el.innerHTML = '<span style="color:#C99C9A;">U</span><span style="color:#C0BFBE;"> Love.</span>';
+      // Once colored, no need to keep watching
+      if(text === 'U Love.') observer.disconnect();
+    }
+  });
+  observer.observe(el, {childList:true, characterData:true, subtree:true});
+})();
+</script>
 <script>
 // ── CRYPTO PRICES ──
 let BTC_PRICE = null, TRX_PRICE = null, pricesLoaded = false;
@@ -374,7 +400,7 @@ async function openPaymentModal(){
   closeCart();
   ['BTC','USDT','TRX'].forEach(t=>{document.getElementById('opt'+t).classList.remove('selected');document.getElementById('details'+t).classList.remove('active');});
   selectedPayment=null;
-  ['fName','fTelegram','fContact','fAddress','fTxHash'].forEach(id=>{const el=document.getElementById(id);el.value='';el.classList.remove('error');});
+  ['fName','fTelegram','fInstagram','fEmail','fPhone','fAddress','fTxHash'].forEach(id=>{const el=document.getElementById(id);el.value='';el.classList.remove('error');});
   document.getElementById('paymentModal').classList.add('open');document.body.style.overflow='hidden';
   if(!pricesLoaded) await fetchLivePrices();
   updateModalAmounts();
@@ -392,16 +418,18 @@ function copyAddress(addrId,btnId){
 }
 function confirmPayment(){
   if(!selectedPayment){showToast('Please select a payment currency first');return;}
-  const fields=[{id:'fName'},{id:'fTelegram'},{id:'fContact'},{id:'fAddress'},{id:'fTxHash'}];
+  const fields=[{id:'fName'},{id:'fTelegram'},{id:'fInstagram'},{id:'fEmail'},{id:'fPhone'},{id:'fAddress'},{id:'fTxHash'}];
   let valid=true;
   fields.forEach(f=>{const el=document.getElementById(f.id);if(!el.value.trim()){el.classList.add('error');valid=false;}else el.classList.remove('error');});
   if(!valid){showToast('Please fill in all required fields');return;}
-  const name=document.getElementById('fName').value.trim(),telegram=document.getElementById('fTelegram').value.trim(),contact=document.getElementById('fContact').value.trim(),address=document.getElementById('fAddress').value.trim(),txHash=document.getElementById('fTxHash').value.trim();
+  const name=document.getElementById('fName').value.trim(),_tg=document.getElementById('fTelegram').value.trim(),_ig=document.getElementById('fInstagram').value.trim(),email=document.getElementById('fEmail').value.trim(),phone=document.getElementById('fPhone').value.trim(),address=document.getElementById('fAddress').value.trim(),txHash=document.getElementById('fTxHash').value.trim();
+  const telegram=_tg.startsWith('@')?_tg:'@'+_tg;
+  const instagram=_ig.startsWith('@')?_ig:'@'+_ig;
   const total=getCartTotal(),method={btc:'Bitcoin (BTC)',usdt:'Tether (USDT)',trx:'Tron (TRX)'}[selectedPayment];
   const cryptoAmt=selectedPayment==='btc'?`${(total/BTC_PRICE).toFixed(6)} BTC  (@ $${BTC_PRICE.toLocaleString()}/BTC)`:selectedPayment==='usdt'?`${total.toFixed(2)} USDT`:`${(total/TRX_PRICE).toFixed(0)} TRX  (@ $${TRX_PRICE.toFixed(4)}/TRX)`;
   const ref='DAATCHI-'+Math.random().toString(36).substr(2,6).toUpperCase(),date=new Date().toUTCString();
   const itemLines=Object.values(cart).map(i=>`  • [${i.code}] ${i.name} (${i.color}) x${i.qty}  —  $${(i.price*i.qty).toFixed(2)}`).join('\n');
-  document.getElementById('receiptMessage').textContent=`🛍 NEW ORDER — DAATCHI Fashion\n━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📦 Order Ref : ${ref}\n📅 Date      : ${date}\n\n━━━ 🛒 ITEMS ━━━\n${itemLines}\n\n💰 Total     : $${total.toFixed(2)}\n💳 Paid with : ${method}\n🔗 Amount    : ${cryptoAmt}\n🧾 TX Hash   : ${txHash}\n\n━━━ 👤 CUSTOMER ━━━\n👤 Name     : ${name}\n✈ Telegram  : ${telegram}\n📧 Contact  : ${contact}\n📦 Address  : ${address}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━\nPlease confirm receipt and process my order. Thank you!`;
+  document.getElementById('receiptMessage').textContent=`🛍 NEW ORDER — DAATCHI Fashion\n━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📦 Order Ref : ${ref}\n📅 Date      : ${date}\n\n━━━ 🛒 ITEMS ━━━\n${itemLines}\n\n💰 Total     : $${total.toFixed(2)}\n💳 Paid with : ${method}\n🔗 Amount    : ${cryptoAmt}\n🧾 TX Hash   : ${txHash}\n\n━━━ 👤 CUSTOMER ━━━\n👤 Name         : ${name}\n✈ Telegram ID   : ${telegram}\n📸 INSTAGRAM ID : ${instagram}\n📧 Email        : ${email}\n📞 Phone        : ${phone}\n📦 Address      : ${address}\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━\nPlease confirm receipt and process my order. Thank you!`;
   closePaymentModal();document.getElementById('receiptOverlay').classList.add('open');document.body.style.overflow='hidden';
   cart={};updateCartUI();
 }
